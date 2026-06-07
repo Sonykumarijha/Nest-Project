@@ -1,0 +1,26 @@
+services:
+  app:
+    build: .
+    container_name: nest-app
+    ports:
+      - "3000:3000"
+    env_file:
+    - .env
+    depends_on:
+      - mysql
+      - redis
+
+  mysql:
+    image: mysql:8
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: test
+    ports:
+      - "3306:3306"
+
+  redis:
+    image: redis
+    container_name: redis
+    ports:
+      - "6379:6379"
